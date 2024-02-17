@@ -5,25 +5,14 @@ import java.sql.SQLException;
 
 public class DbManager {
 
-    private Connection connection;
+    private DbConfig dbConfig;
 
     public DbManager(){
-        DbConfig dbConfig = new DbConfig();
-        this.connection = dbConfig.connect();
+        this.dbConfig = new DbConfig();
     }
 
     public Connection getConnection(){
-        return connection;
-    }
-
-    public void close(){
-        if(connection != null){
-            try {
-                connection.close();
-            } catch (SQLException e){
-                System.out.println("Fermeture de la connexion à la database échouée");
-            }
-        }
+        return dbConfig.connect();
     }
 
 }
