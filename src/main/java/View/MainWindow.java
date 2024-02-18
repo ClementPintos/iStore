@@ -1,10 +1,13 @@
 package View;
 
+import Controller.AccueilController;
 import Controller.LaunchingController;
 import Controller.SigninController;
 import Controller.LoginController;
 import DAO.UserDAOImpl;
 import Database.DbManager;
+import Model.User;
+
 import javax.swing.*;
 
 public class MainWindow extends JFrame {
@@ -12,6 +15,8 @@ public class MainWindow extends JFrame {
     private LoginPanel loginPanel;
     private SigninPanel signinPanel;
     private AccueilPanel accueilPanel;
+
+    private User connectedUser;
 
     public MainWindow(){
 
@@ -32,10 +37,23 @@ public class MainWindow extends JFrame {
         new LaunchingController(this, launchingPanel);
         new SigninController(this, signinPanel, userDAO);
         new LoginController(this, loginPanel, userDAO);
+        new AccueilController(this, accueilPanel, userDAO);
 
         add(launchingPanel);
+
     }
 
+    public void setConnectedUser(User user){
+        this.connectedUser = user;
+    }
+    public User getConnectedUser(){
+        return this.connectedUser;
+    }
+
+    public void deconnexion(){
+        setConnectedUser(null);
+        showLaunchingPanel();
+    }
     public void showLoginPanel(){
         switchPanel(loginPanel);
     }
@@ -55,6 +73,9 @@ public class MainWindow extends JFrame {
         revalidate();
         repaint();
     }
-
+    public boolean isAdmin(){
+        User connectedUser = getConnectedUser();
+        return connectedUser.getRole().equals("Admin");
+    }
 
 }

@@ -1,12 +1,16 @@
 package DAO;
 
 import Database.DbManager;
+import Model.Item;
+import Model.Store;
 import Model.User;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -97,6 +101,128 @@ public class UserDAOImpl implements UserDAO {
               throw new SQLException("Erreur lors de la récupération du nombre d'utilisateurs");
           }
         }
+    }
+
+    @Override
+    public boolean readUser(String loginCible) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean updateUser(String loginCible) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean deleteUser(String loginCible) throws SQLException {
+
+        String query = "DELETE FROM user WHERE email = ?;";
+
+        try(
+            Connection connection = dbManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+        ) {
+            statement.setString(1, loginCible);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la délétion de l'utilisateur : " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean whitelist(String loginCible) throws SQLException {
+
+        String query = "UPDATE user SET whitelisted = true WHERE email = ?;";
+
+        try(
+                Connection connection = dbManager.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query);
+        ) {
+            statement.setString(1, loginCible);
+
+            statement.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du whitelisting de l'utilisateur : " + e.getMessage());
+            return false;
+
+        }
+    }
+    public List<User> getNonWhitelistedUsers() throws SQLException {
+
+        String query = "SELECT * FROM user WHERE whitelisted = false;";
+        List<User> users = new ArrayList<>();
+
+        try(
+            Connection connection = dbManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+            try(ResultSet result = statement.executeQuery()){
+                while(result.next()){
+                    String email = result.getString("email");
+                    String pseudo = result.getString("pseudo");
+                    String password = result.getString("password");
+                    String role = result.getString("role");
+                    Boolean whitelisted = result.getBoolean("whitelisted");
+                    users.add(new User(email, pseudo, password, role, whitelisted));
+                }
+            }
+        } catch (SQLException e){
+            System.out.println("Erreur lors de la récupération des utilisateurs non-whitelistés : ");
+        }
+        return users;
+    }
+
+    public List<User> getUsers() throws SQLException {
+
+        String query = "SELECT * FROM user;";
+        List<User> users = new ArrayList<>();
+        try(
+            Connection connection = dbManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+            try(ResultSet result = statement.executeQuery()){
+                while(result.next()){
+                    String email = result.getString("email");
+                    String pseudo = result.getString("pseudo");
+                    String password = result.getString("password");
+                    String role = result.getString("role");
+                    Boolean whitelisted = result.getBoolean("whitelisted");
+                    users.add(new User(email, pseudo, password, role, whitelisted));
+                }
+            }
+        } catch (SQLException e){
+            System.out.println("Erreur lors de la récupération des utilisateurs");
+        }
+        return users;
+    }
+
+    @Override
+    public boolean addStore(Store store) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean addItem(Item item) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean deleteItem(int itemId) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean increaseItem(int itemId, int quantity) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean decreaseItem(int itemId, int quantity) throws SQLException {
+        return false;
     }
 
 }

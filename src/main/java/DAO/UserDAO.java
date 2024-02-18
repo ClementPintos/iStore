@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import Model.Item;
 import Model.Store;
@@ -14,6 +15,8 @@ public interface UserDAO {
     boolean readUser(String loginCible) throws SQLException;
     boolean updateUser(String loginCible) throws SQLException;
     boolean deleteUser(String loginCible) throws SQLException;
+    List<User> getNonWhitelistedUsers() throws SQLException;
+    List<User> getUsers() throws SQLException;
     boolean whitelist(String loginCible) throws SQLException;
     boolean addStore(Store store) throws SQLException;
     boolean addItem(Item item) throws SQLException;

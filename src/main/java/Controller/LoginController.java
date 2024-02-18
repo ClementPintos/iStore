@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.UserDAO;
 import DAO.UserDAOImpl;
+import Model.User;
 import View.MainWindow;
 import View.LoginPanel;
 
@@ -41,8 +42,10 @@ public class LoginController {
 
         String login = loginPanel.getLoginField();
         String password = hashPassword(loginPanel.getPasswordField());
-
-        if(userDAO.checkLogin(login, password) != null){
+        User user = userDAO.checkLogin(login, password);
+        if(user != null){
+            loginPanel.emptyPasswordField();
+            mainWindow.setConnectedUser(user);
             mainWindow.showAccueilPanel();
         }
     }

@@ -59,6 +59,9 @@ public class LoginPanel extends JPanel {
     public String getPasswordField() {
         return passwordField.getText();
     }
+    public void emptyPasswordField() {
+        passwordField.setText("");
+    }
 
     public void setLoginRetourButtonAction(ActionListener action){
         returnButton.addActionListener(action);

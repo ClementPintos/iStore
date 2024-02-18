@@ -1,5 +1,7 @@
 package Utils;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.regex.Pattern;
 
 public class EmailValidator {
