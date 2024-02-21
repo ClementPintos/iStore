@@ -35,8 +35,6 @@ public class AccueilPanel extends JPanel {
     private JButton increaseItemButton;
     private JButton decreaseItemButton;
     private JButton deconnectionButton;
-    private JPanel deconnectionColumn;
-    private JLabel deconnectionLabel;
 
     public AccueilPanel(){
 
@@ -88,7 +86,7 @@ public class AccueilPanel extends JPanel {
 
         addStoreButton = new JButton("Ajouter un Store");
         removeStoreButton = new JButton("Retirer un Store");
-        employeesStoreButton = new JButton("Visualiser la liste des employees");
+        employeesStoreButton = new JButton("Visualiser la liste des employés");
 
         storeIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         addStoreButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -157,8 +155,23 @@ public class AccueilPanel extends JPanel {
     public void setDeleteUserButtonAction(ActionListener action){
         deleteUserButton.addActionListener(action);
     }
+    public void setUpdateUserButtonAction(ActionListener action){
+        updateUserButton.addActionListener(action);
+    }
+    public void setReadUserButtonAction(ActionListener action){
+        readUserButton.addActionListener(action);
+    }
     public void setWhitelistUserButtonAction(ActionListener action){
         whitelistUserButton.addActionListener(action);
+    }
+    public void setAddStoreButtonAction(ActionListener action){
+        addStoreButton.addActionListener(action);
+    }
+    public void setDeleteStoreButtonAction(ActionListener action){
+        removeStoreButton.addActionListener(action);
+    }
+    public void setReadEmployeesButtonAction(ActionListener action){
+        employeesStoreButton.addActionListener(action);
     }
     public void setDeconnectionButtonAction(ActionListener action){
         deconnectionButton.addActionListener(action);

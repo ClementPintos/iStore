@@ -1,12 +1,9 @@
 package Utils;
 
-import View.WhitelistUserPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.util.function.Consumer;
 
 public class ButtonEditor extends DefaultCellEditor {
@@ -14,7 +11,7 @@ public class ButtonEditor extends DefaultCellEditor {
     private String label;
     private boolean isPushed;
     private JTable userTable;
-    private Consumer<String> buttonClickedAction;
+    protected Consumer<String> buttonClickedAction;
     private Runnable afterClickAction;
 
     public ButtonEditor(JCheckBox checkBox, JTable userTable, Consumer<String> buttonClickedAction, Runnable afterClickAction) {

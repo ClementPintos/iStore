@@ -1,10 +1,10 @@
 package Controller;
 
+import DAO.StoreDAO;
 import DAO.UserDAO;
 import Model.User;
-import Utils.EmailValidator;
-import View.AddUserPanel;
 import View.MainWindow;
+import View.AddUserPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,53 +14,43 @@ import java.sql.SQLException;
 import static Utils.PasswordUtils.hashPassword;
 
 public class AddUserController {
-
     private UserDAO userDAO;
-    private AddUserPanel addUserPanel;
+    private StoreDAO storeDAO;
+    private AddUserPanel panel;
+    private MainWindow mainWindow;
 
-    public AddUserController(JFrame parent, UserDAO userDAO){
+    public AddUserController(UserDAO userDAO, StoreDAO storeDAO, AddUserPanel panel, MainWindow mainWindow) {
         this.userDAO = userDAO;
-        addUserPanel = new AddUserPanel(parent, userDAO);
+        this.storeDAO = storeDAO;
+        this.panel = panel;
+        this.mainWindow = mainWindow;
 
-        if(((MainWindow)parent).isAdmin()){
-            addUserPanel.getRoleComboBox().setEnabled(true);
-        }
-
-        addUserPanel.getAddButton().addActionListener(new ActionListener() {
+        panel.getAddButton().addActionListener(new ActionListener() {
+            int userId = 0;
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if(EmailValidator.emailValide(addUserPanel.getEmailField().getText())){
-                    int dialogResult = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir ajouter cet utilisateur ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                    if(dialogResult == JOptionPane.YES_OPTION){
-                        ajouter();
-                    }
+                try {
+                    userId = userDAO.getLastUserId()+1;
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
-                else {
-                    JOptionPane.showMessageDialog(parent,"Veuillez rentrer un email valide" , "Erreur ", JOptionPane.ERROR_MESSAGE);
+                String email = panel.getEmailField().getText();
+                String pseudo = panel.getPseudoField().getText();
+                String password = hashPassword(panel.getPasswordField().getText());
+                String role = (String) panel.getRoleSelect().getSelectedItem();
+                boolean whitelisted = mainWindow.isAdmin();
+                int storeId = storeDAO.getStoreId(String.valueOf(panel.getStoreSelect().getSelectedItem()));
+
+                try {
+                    User user = new User(userId, email, pseudo, password, role, whitelisted, storeId);
+                    if(userDAO.addUser(user)){
+                        JOptionPane.showMessageDialog(panel, "Utilisateur ajouté avec succès.");
+                    };
+                    panel.refreshPanel(whitelisted);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
-    }
-
-    private void ajouter(){
-        String email = addUserPanel.getEmailField().getText();
-        String pseudo = addUserPanel.getPseudoField().getText();
-        String password = hashPassword(addUserPanel.getPasswordField().getText());
-        String role =(String) addUserPanel.getRoleComboBox().getSelectedItem();
-        boolean whitelisted = ((MainWindow)addUserPanel.getParent()).isAdmin();
-        try {
-            User user = new User(email, pseudo, password, role, whitelisted);
-            userDAO.addUser(user);
-            JOptionPane.showMessageDialog(addUserPanel, "Utilisateur ajouté avec succès");
-            addUserPanel.getEmailField().setText("");
-            addUserPanel.getPseudoField().setText("");
-            addUserPanel.getPasswordField().setText("");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void showPanel() {
-        addUserPanel.setVisible(true);
     }
 }

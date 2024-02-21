@@ -18,7 +18,6 @@ public class DbConfig {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
-            System.out.println("Connection à la base de donnée effectuée");
         } catch (ClassNotFoundException e) {
             System.out.println("Erreur lors du chargement du driver JDBC");
         } catch (SQLException e) {

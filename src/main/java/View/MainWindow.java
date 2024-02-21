@@ -4,6 +4,8 @@ import Controller.AccueilController;
 import Controller.LaunchingController;
 import Controller.SigninController;
 import Controller.LoginController;
+import DAO.ItemDAOImpl;
+import DAO.StoreDAOImpl;
 import DAO.UserDAOImpl;
 import Database.DbManager;
 import Model.User;
@@ -28,6 +30,8 @@ public class MainWindow extends JFrame {
 
         DbManager dbManager = new DbManager();
         UserDAOImpl userDAO = new UserDAOImpl(dbManager);
+        StoreDAOImpl storeDAO = new StoreDAOImpl(dbManager);
+        ItemDAOImpl itemDAO = new ItemDAOImpl(dbManager);
 
         launchingPanel = new LaunchingPanel();
         loginPanel = new LoginPanel();
@@ -37,7 +41,7 @@ public class MainWindow extends JFrame {
         new LaunchingController(this, launchingPanel);
         new SigninController(this, signinPanel, userDAO);
         new LoginController(this, loginPanel, userDAO);
-        new AccueilController(this, accueilPanel, userDAO);
+        new AccueilController(this, accueilPanel, userDAO, storeDAO, itemDAO);
 
         add(launchingPanel);
 
@@ -53,6 +57,8 @@ public class MainWindow extends JFrame {
     public void deconnexion(){
         setConnectedUser(null);
         showLaunchingPanel();
+        revalidate();
+        repaint();
     }
     public void showLoginPanel(){
         switchPanel(loginPanel);
@@ -76,6 +82,10 @@ public class MainWindow extends JFrame {
     public boolean isAdmin(){
         User connectedUser = getConnectedUser();
         return connectedUser.getRole().equals("Admin");
+    }
+    public boolean estAuChomage(){
+        User connectedUser = getConnectedUser();
+        return connectedUser.getStore() == 1;
     }
 
 }

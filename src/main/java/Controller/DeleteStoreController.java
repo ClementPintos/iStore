@@ -3,28 +3,26 @@ package Controller;
 import DAO.StoreDAO;
 import DAO.UserDAO;
 import Model.Store;
-import Model.User;
-import View.DeleteUser.DeleteUserMainPanel;
-import View.DeleteUser.DeleteUserSousPanel;
+import View.DeleteStore.DeleteStoreMainPanel;
+import View.DeleteStore.DeleteStoreSousPanel;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
-public class DeleteUserController {
-    private UserDAO userDAO;
+public class DeleteStoreController {
     private StoreDAO storeDAO;
-    private DeleteUserMainPanel parentPanel;
+    private UserDAO userDAO;
+    private DeleteStoreMainPanel parentPanel;
 
-    public DeleteUserController(DeleteUserMainPanel parentPanel, UserDAO userDAO, StoreDAO storeDAO) {
-        this.userDAO = userDAO;
+    public DeleteStoreController(DeleteStoreMainPanel parentPanel, StoreDAO storeDAO) {
         this.storeDAO = storeDAO;
         this.parentPanel = parentPanel;
     }
 
     public void refreshPanel() {
         try {
-            for (User user : userDAO.getUsers()) {
-                parentPanel.add(new DeleteUserSousPanel(user, userDAO, storeDAO, parentPanel));
+            for (Store store : storeDAO.getStores()) {
+                parentPanel.add(new DeleteStoreSousPanel(store, storeDAO, userDAO, parentPanel));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors du rafraîchissement de la page", "Erreur", JOptionPane.ERROR_MESSAGE);

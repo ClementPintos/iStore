@@ -50,13 +50,14 @@ public class SigninController {
     private boolean signin() throws SQLException {
         String email = signinPanel.getEmailField();
         String password = hashPassword(signinPanel.getPasswordField());
+        int id_user = userDAO.getLastUserId() + 1;
 
         if(userDAO.getUserCount() == 0){
-            User newUser = new User(email, email, password, "Admin", true);
+            User newUser = new User(1, email, email, password, "Admin", true, 1);
             return userDAO.addUser(newUser);
         }
         else {
-            User newUser = new User(email, email, password);
+            User newUser = new User(userDAO.getLastUserId(), email, email, password, "User", false, id_user);
             return userDAO.addUser(newUser);
         }
     }

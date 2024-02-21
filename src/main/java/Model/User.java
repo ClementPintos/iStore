@@ -2,26 +2,22 @@ package Model;
 
 public class User {
 
+    private int idUser;
+    private int idStore;
     private String email;
     private String pseudo;
     private String password;
     private String role;
     private boolean whitelisted;
 
-    public User(String email, String pseudo, String password){
-        this.email = email;
-        this.pseudo = pseudo;
-        this.password = password;
-        this.role = "User";
-        this.whitelisted = false;
-    }
-
-    public User(String email, String pseudo, String password, String role, boolean whitelisted) {
+    public User(int idUser, String email, String pseudo, String password, String role, Boolean whitelisted, int idStore) {
+        this.idUser = idUser;
         this.email = email;
         this.pseudo = pseudo;
         this.password = password;
         this.role = role;
         this.whitelisted = whitelisted;
+        this.idStore = idStore;
     }
 
     public String getEmail() {
@@ -55,6 +51,9 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+    public void setStore(int idStore) {
+        this.idStore = idStore;
+    }
 
     public boolean isWhitelisted() {
         return whitelisted;
@@ -62,5 +61,12 @@ public class User {
 
     public void setWhitelisted(boolean whitelisted) {
         this.whitelisted = whitelisted;
+    }
+
+    public int getId() {
+        return idUser;
+    }
+    public int getStore() {
+        return idStore;
     }
 }
