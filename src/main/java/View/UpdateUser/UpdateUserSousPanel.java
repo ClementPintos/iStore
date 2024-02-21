@@ -33,7 +33,7 @@ public class UpdateUserSousPanel extends JPanel {
         String[] roles = {"User", "Admin"};
         roleComboBox = new JComboBox<>(roles);
         roleComboBox.setSelectedItem(user.getRole());
-
+        roleComboBox.setEnabled(user.getRole().equals("Admin"));
         List<Store> stores = null;
         try {
             stores = storeDAO.getStores();
@@ -47,6 +47,7 @@ public class UpdateUserSousPanel extends JPanel {
         }
         storeComboBox = new JComboBox<>(storeNames);
         storeComboBox.setSelectedItem(storeDAO.getStoreName(user.getStore()));
+        storeComboBox.setEnabled(user.getRole().equals("Admin"));
 
 
         JButton updateButton = new JButton("Mettre à jour");

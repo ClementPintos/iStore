@@ -2,10 +2,15 @@ package Controller;
 
 import DAO.*;
 import View.*;
+import View.AddItem.AddItemMainPanel;
 import View.AddStore.AddStoreMainPanel;
+import View.DecreaseItem.DecreaseItemMainPanel;
+import View.DeleteItem.DeleteItemMainPanel;
 import View.DeleteStore.DeleteStoreMainPanel;
 import View.DeleteUser.DeleteUserMainPanel;
+import View.IncreaseItem.IncreaseItemMainPanel;
 import View.ReadEmployees.ReadEmployeesMainPanel;
+import View.ReadItems.ReadItemsMainPanel;
 import View.ReadUser.ReadUserMainPanel;
 import View.UpdateUser.UpdateUserMainPanel;
 import View.WhitelistUser.WhitelistUserMainPanel;
@@ -24,7 +29,7 @@ public class AccueilController {
         this.mainWindow = mainWindow;
         this.userDAO = userDAO;
         this.storeDAO = storeDAO;
-        // this.itemDAO = itemDAO;
+        this.itemDAO = itemDAO;
 
         acceuilPanel.setAddUserButtonAction(e -> {
             try {
@@ -106,11 +111,65 @@ public class AccueilController {
                 throw new RuntimeException(ex);
             }
         });
+
+        acceuilPanel.setAddItemButtonAction(e -> {
+            if (mainWindow.isAdmin()){
+                try {
+                    openAddItemWindow();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Vous avez besoin d'avoir un rôle Admin pour accéder à cette fonctionnalité", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        acceuilPanel.setDeleteItemButtonAction(e -> {
+            if (mainWindow.isAdmin()){
+                try {
+                    openDeleteItemWindow();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Vous avez besoin d'avoir un rôle Admin pour accéder à cette fonctionnalité", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        acceuilPanel.setReadItemsButtonAction(e -> {
+            try {
+                openReadItemsWindow();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erreur lors de l'ouverture de la page", "Erreur", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
+            }
+        });
+        acceuilPanel.setIncreaseItemButtonAction(e -> {
+            try {
+                openIncreaseItemWindow();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erreur lors de l'ouverture de la page", "Erreur", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
+            }
+        });
+        acceuilPanel.setDecreaseItemButtonAction(e -> {
+            try {
+                openDecreaseItemWindow();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erreur lors de l'ouverture de la page", "Erreur", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
+            }
+        });
         acceuilPanel.setDeconnectionButtonAction(e -> {
             mainWindow.deconnexion();
         });
 
     }
+
+
+    ////////////////////////// Constructeurs Users
 
     private void openAddUserWindow() throws SQLException {
         AddUserPanel addUserMainPanel = new AddUserPanel(userDAO, storeDAO);
@@ -149,6 +208,8 @@ public class AccueilController {
 
     }
 
+    ////////////////////////// Constructeurs Stores
+
     private void openAddStoreWindow() throws SQLException {
         AddStoreMainPanel addStoreMainPanel = new AddStoreMainPanel(userDAO);
         AddStoreController addStoreController = new AddStoreController(userDAO, storeDAO, addStoreMainPanel);
@@ -168,6 +229,43 @@ public class AccueilController {
         openWindow("Visualiser les employés", readEmployeesMainPanel);
     }
 
+    ////////////////////////// Constructeurs Items
+    private void openAddItemWindow() throws SQLException {
+        AddItemMainPanel addItemMainPanel = new AddItemMainPanel(itemDAO, storeDAO);
+        AddItemController addItemController = new AddItemController(addItemMainPanel, itemDAO, storeDAO);
+        addItemMainPanel.refreshPanel();
+        openWindow("Ajouter un Item", addItemMainPanel);
+    }
+
+    private void openReadItemsWindow() throws SQLException {
+        ReadItemsMainPanel readItemsMainPanel = new ReadItemsMainPanel(mainWindow, itemDAO, storeDAO);
+        ReadItemsController readItemsController = new ReadItemsController(readItemsMainPanel, itemDAO, storeDAO);
+        readItemsMainPanel.refreshPanel();
+        openWindow("Visualiser les employés", readItemsMainPanel);
+    }
+
+    private void openIncreaseItemWindow() throws SQLException {
+        IncreaseItemMainPanel increaseItemMainPanel = new IncreaseItemMainPanel(mainWindow, itemDAO , storeDAO);
+        IncreaseItemController increaseItemController = new IncreaseItemController(increaseItemMainPanel, itemDAO, storeDAO);
+        increaseItemMainPanel.refreshPanel();
+        openWindow("Augmenter la quantité d'un produit", increaseItemMainPanel);
+    }
+
+    private void openDecreaseItemWindow() throws SQLException {
+        DecreaseItemMainPanel decreaseItemMainPanel = new DecreaseItemMainPanel(mainWindow, itemDAO , storeDAO);
+        DecreaseItemController decreaseItemController = new DecreaseItemController(decreaseItemMainPanel, itemDAO, storeDAO);
+        decreaseItemMainPanel.refreshPanel();
+        openWindow("Diminuer la quantité d'un produit", decreaseItemMainPanel);
+    }
+
+    private void openDeleteItemWindow() throws SQLException {
+        DeleteItemMainPanel deleteStoreMainPanel = new DeleteItemMainPanel(itemDAO, storeDAO);
+        DeleteItemController deleteItemController = new DeleteItemController(deleteStoreMainPanel, itemDAO, storeDAO);
+        deleteStoreMainPanel.refreshPanel();
+        openWindow("Delete Item", deleteStoreMainPanel);
+    }
+
+
     private void openWindow(String titre, JPanel panel) throws SQLException   {
         JDialog dialog = new JDialog();
         dialog.setTitle(titre);
@@ -177,4 +275,5 @@ public class AccueilController {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
+
 }

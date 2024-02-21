@@ -39,7 +39,9 @@ public class ReadEmployeesMainPanel extends JPanel {
             add(header);
 
             for (User user : users) {
-                add(new ReadEmployeesSousPanel(user, storeDAO));
+                if(user.getStore() != 1){
+                    add(new ReadEmployeesSousPanel(user, storeDAO));
+                }
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors du rafraîchissement de la page", "Erreur", JOptionPane.ERROR_MESSAGE);

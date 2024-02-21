@@ -4,6 +4,7 @@ import DAO.StoreDAO;
 import DAO.UserDAO;
 import Model.User;
 import View.DeleteUser.DeleteUserMainPanel;
+import View.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,7 @@ public class DeleteUserSousPanel extends JPanel {
                         if(window != null){
                             window.dispose();
                         }
+
                     };
                     parentPanel.refreshPanel();
                 } catch (SQLException ex) {

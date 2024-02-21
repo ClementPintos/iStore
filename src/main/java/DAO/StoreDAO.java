@@ -10,7 +10,7 @@ public interface StoreDAO {
 
     boolean addStore(Store store) throws SQLException;
     int getLastStoreId() throws SQLException;
-    boolean deleteStore(String nomStore) throws SQLException;
+    boolean deleteStore(int idStore) throws SQLException;
     List<Store> getStores() throws SQLException;
 
     int getStoreId(String nomStore);

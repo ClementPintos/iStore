@@ -23,11 +23,12 @@ public class DeleteStoreSousPanel extends JPanel {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int idStore = store.getStoreId();
                 try {
                     int result = JOptionPane.showConfirmDialog(parentPanel, "Etes-vous sûr de vouloir effectuer cette action ?");
                     if (result == JOptionPane.YES_OPTION){
-                        userDAO.mettreAuChomage(store.getStoreId());
-                        storeDAO.deleteStore(nom);
+                        userDAO.mettreAuChomage(idStore);
+                        storeDAO.deleteStore(idStore);
                     }
 
                     parentPanel.refreshPanel();

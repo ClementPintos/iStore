@@ -6,29 +6,15 @@ import java.awt.event.ActionListener;
 
 public class AccueilPanel extends JPanel {
 
-    private ImageIcon userIcon;
-    private Image userImage;
-    private Image newUserImage;
-    private JLabel userIconLabel;
-    private JPanel userColumn;
     private JButton addUserButton;
     private JButton deleteUserButton;
     private JButton readUserButton;
     private JButton updateUserButton;
     private JButton whitelistUserButton;
-    private ImageIcon storeIcon;
-    private Image storeImage;
-    private Image newStoreImage;
-    private JLabel storeIconLabel;
-    private JPanel storeColumn;
     private JButton addStoreButton;
     private JButton removeStoreButton;
     private JButton employeesStoreButton;
-    private ImageIcon itemIcon;
-    private Image itemImage;
-    private Image newItemImage;
     private JLabel itemIconLabel;
-    private JPanel itemColumn;
     private JButton addItemButton;
     private JButton removeItemButton;
     private JButton browseItemButton;
@@ -42,11 +28,11 @@ public class AccueilPanel extends JPanel {
 
 
         // Icon
-        userIcon = new ImageIcon("src\\main\\resources\\user_icon.png");
-        userImage = userIcon.getImage();
-        newUserImage = userImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon userIcon = new ImageIcon("src\\main\\resources\\user_icon.png");
+        Image userImage = userIcon.getImage();
+        Image newUserImage = userImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         userIcon = new ImageIcon(newUserImage);
-        userIconLabel = new JLabel(userIcon);
+        JLabel userIconLabel = new JLabel(userIcon);
         // Bouttons
         addUserButton = new JButton("Ajouter un User");
         deleteUserButton = new JButton("Retirer un User");
@@ -61,7 +47,7 @@ public class AccueilPanel extends JPanel {
         updateUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         whitelistUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         // Colonne User
-        userColumn = new JPanel();
+        JPanel userColumn = new JPanel();
         userColumn.setLayout(new BoxLayout(userColumn, BoxLayout.Y_AXIS));
         userColumn.add(Box.createRigidArea(new Dimension(0,32)));
         userColumn.add(userIconLabel);
@@ -78,11 +64,11 @@ public class AccueilPanel extends JPanel {
 
         add(userColumn);
 
-        storeIcon = new ImageIcon("src\\main\\resources\\store_icon.png");
-        storeImage = storeIcon.getImage();
-        newStoreImage = storeImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon storeIcon = new ImageIcon("src\\main\\resources\\store_icon.png");
+        Image storeImage = storeIcon.getImage();
+        Image newStoreImage = storeImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         storeIcon = new ImageIcon(newStoreImage);
-        storeIconLabel = new JLabel(storeIcon);
+        JLabel storeIconLabel = new JLabel(storeIcon);
 
         addStoreButton = new JButton("Ajouter un Store");
         removeStoreButton = new JButton("Retirer un Store");
@@ -93,7 +79,7 @@ public class AccueilPanel extends JPanel {
         removeStoreButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         employeesStoreButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        storeColumn = new JPanel();
+        JPanel storeColumn = new JPanel();
         storeColumn.setLayout(new BoxLayout(storeColumn, BoxLayout.Y_AXIS));
 
         storeColumn.add(Box.createRigidArea(new Dimension(0,32)));
@@ -107,9 +93,9 @@ public class AccueilPanel extends JPanel {
 
         add(storeColumn);
 
-        itemIcon = new ImageIcon("src\\main\\resources\\item_icon.png");
-        itemImage = itemIcon.getImage();
-        newItemImage = itemImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon itemIcon = new ImageIcon("src\\main\\resources\\item_icon.png");
+        Image itemImage = itemIcon.getImage();
+        Image newItemImage = itemImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         itemIcon = new ImageIcon(newItemImage);
         itemIconLabel = new JLabel(itemIcon);
 
@@ -127,7 +113,7 @@ public class AccueilPanel extends JPanel {
         increaseItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         decreaseItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        itemColumn = new JPanel();
+        JPanel itemColumn = new JPanel();
         itemColumn.setLayout(new BoxLayout(itemColumn, BoxLayout.Y_AXIS));
 
         itemColumn.add(Box.createRigidArea(new Dimension(0,32)));
@@ -175,6 +161,22 @@ public class AccueilPanel extends JPanel {
     }
     public void setDeconnectionButtonAction(ActionListener action){
         deconnectionButton.addActionListener(action);
+    }
+
+    public void setAddItemButtonAction(ActionListener action){
+        addItemButton.addActionListener(action);
+    }
+    public void setDeleteItemButtonAction(ActionListener action){
+        removeItemButton.addActionListener(action);
+    }
+    public void setReadItemsButtonAction(ActionListener action){
+        browseItemButton.addActionListener(action);
+    }
+    public void setDecreaseItemButtonAction(ActionListener action){
+        decreaseItemButton.addActionListener(action);
+    }
+    public void setIncreaseItemButtonAction(ActionListener action){
+        increaseItemButton.addActionListener(action);
     }
 
 }

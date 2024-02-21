@@ -63,8 +63,8 @@ public class DeleteUserMainPanel extends JPanel {
     public boolean isOut(){
         try {
             // On verifie si l'utilisateur connecté s'est supprimé
-            String email = String.valueOf(userDAO.getUser(mainWindow.getConnectedUser().getEmail()));
-            if(email == null){
+            User user = userDAO.getUser(mainWindow.getConnectedUser().getEmail());
+            if(user == null){
                 mainWindow.deconnexion();
                 return true;
             };

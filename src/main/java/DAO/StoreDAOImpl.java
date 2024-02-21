@@ -35,19 +35,24 @@ public class StoreDAOImpl implements StoreDAO{
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur avec la récupération de l'id des stores.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-        return 0;
+        return 1;
     }
     public boolean addStore(Store store) throws SQLException {
 
-        String query = "INSERT INTO store VALUES (?, ?);";
+        String store_query = "INSERT INTO store VALUES (?, ?);";
+        String inventory_query = "INSERT INTO inventory VALUES (?, 1, 1);";
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement store_statement = connection.prepareStatement(store_query);
+            PreparedStatement inventory_statement = connection.prepareStatement(inventory_query);
         ) {
-            statement.setInt(1, store.getStoreId());
-            statement.setString(2, store.getStoreName());
-            statement.executeUpdate();
+            store_statement.setInt(1, store.getStoreId());
+            inventory_statement.setInt(1, store.getStoreId());
+            store_statement.setString(2, store.getStoreName());
+            store_statement.executeUpdate();
+            inventory_statement.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             System.out.println("id : " + store.getStoreId() + ", name : " + store.getStoreName());
@@ -56,26 +61,34 @@ public class StoreDAOImpl implements StoreDAO{
         }
     }
 
-    public boolean deleteStore(String nomStore) throws SQLException {
+    public boolean deleteStore(int idStore) throws SQLException {
 
-        String query = "DELETE FROM store WHERE name_store = ?;";
+        String inventory_query = "DELETE FROM inventory WHERE id_store = ?;";
+        String store_query = "DELETE FROM store WHERE id_store = ?;";
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement inventory_statement = connection.prepareStatement(inventory_query);
+                PreparedStatement store_statement = connection.prepareStatement(store_query);
         ) {
-            statement.setString(1, nomStore);
-            statement.executeUpdate();
+
+            inventory_statement.setInt(1, idStore);
+            store_statement.setInt(1, idStore);
+
+            inventory_statement.executeUpdate();
+            store_statement.executeUpdate();
+
             return true;
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erreur lors de la modification du poste de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du store.", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
 
     public List<Store> getStores() throws SQLException {
 
-        String query = "SELECT * FROM store;";
+        String query = "SELECT * FROM store WHERE id_store;";
         List<Store> stores = new ArrayList<>();
         try(
                 Connection connection = dbManager.getConnection();

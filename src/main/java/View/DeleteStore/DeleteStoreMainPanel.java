@@ -41,7 +41,9 @@ public class DeleteStoreMainPanel extends JPanel {
         add(header);
 
         for (Store store : stores) {
-            add(new DeleteStoreSousPanel(store, storeDAO, userDAO, this));
+            if(store.getStoreId() != 1){
+                add(new DeleteStoreSousPanel(store, storeDAO, userDAO, this));
+            }
         }
         revalidate();
         repaint();

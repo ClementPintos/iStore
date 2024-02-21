@@ -51,6 +51,8 @@ public class UpdateUserMainPanel extends JPanel {
         header.add(new JLabel("eMail"));
         header.add(new JLabel("Password"));
         header.add(new JLabel("Pseudo"));
+        header.add(new JLabel("Rôle"));
+        header.add(new JLabel("Lieu de travail"));
         header.add(new JLabel(""));
         add(header);
 

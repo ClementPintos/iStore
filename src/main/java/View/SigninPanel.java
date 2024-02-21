@@ -7,7 +7,6 @@ public class SigninPanel extends JPanel {
 
     private JTextField emailField;
     private JPasswordField passwordField;
-    private JPanel validationPanel;
     private JButton signinButton;
     private JButton returnButton;
 
@@ -49,13 +48,6 @@ public class SigninPanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0,10)));
 
-        validationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel validationLabel = new JLabel("Compte créé, vous pouvez retourner sur l'écran de connection pour aller vous connecter. Si votre compte a été validé.");
-        validationLabel.setFont(new Font("Georgia", Font.PLAIN, 14));
-        validationPanel.add(validationLabel);
-        add(validationPanel);
-        validationPanel.setVisible(false);
-
         add(returnButton);
 
     }
@@ -73,16 +65,15 @@ public class SigninPanel extends JPanel {
     public String getEmailField() {
         return emailField.getText();
     }
+    public void emptyEmailField() {
+        emailField.setText("");
+    }
+    public void emptyPasswordField() {
+        passwordField.setText("");
+    }
 
     public String getPasswordField() {
         return passwordField.getText();
-    }
-
-    public void showValidationMessage() {
-        validationPanel.setVisible(true);
-        emailField.setText("");
-        passwordField.setText("");
-
     }
 
 }

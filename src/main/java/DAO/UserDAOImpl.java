@@ -97,6 +97,7 @@ public class UserDAOImpl implements UserDAO {
             return true;
 
         } catch (SQLException e) {
+            System.out.println(newUser.getId() + ", '"+ newUser.getEmail() + "', '"+  newUser.getPseudo() + "', '"+ newUser.getPassword() +"', '" + newUser.getRole()+"', " + newUser.getStore() );
             JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout d'un nouvel utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }

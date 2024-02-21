@@ -49,6 +49,7 @@ public class AddUserController {
                     panel.refreshPanel(whitelisted);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
+
                 }
             }
         });
