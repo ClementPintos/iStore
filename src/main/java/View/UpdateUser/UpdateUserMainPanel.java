@@ -56,7 +56,7 @@ public class UpdateUserMainPanel extends JPanel {
         add(header);
 
         for (User user : users) {
-            add(new UpdateUserSousPanel(user, userDAO, storeDAO, this));
+            add(new UpdateUserSousPanel(mainWindow, user, userDAO, storeDAO, this));
         }
         revalidate();
         repaint();

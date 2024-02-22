@@ -196,7 +196,7 @@ public class AccueilController {
     }
     private void openUpdateUserWindow() throws SQLException {
         UpdateUserMainPanel updateUserMainPanel = new UpdateUserMainPanel(userDAO, storeDAO, mainWindow);
-        UpdateUserController updateUserController = new UpdateUserController(updateUserMainPanel, userDAO, storeDAO);
+        UpdateUserController updateUserController = new UpdateUserController(updateUserMainPanel, mainWindow, userDAO, storeDAO);
         updateUserMainPanel.refreshPanel();
         openWindow("Update User", updateUserMainPanel);
 

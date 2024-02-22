@@ -4,6 +4,7 @@ import DAO.StoreDAO;
 import DAO.UserDAO;
 import Model.Store;
 import Model.User;
+import View.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class UpdateUserSousPanel extends JPanel {
     private final JComboBox<String> roleComboBox;
     private final JComboBox<String> storeComboBox;
 
-    public UpdateUserSousPanel(User user, UserDAO userDAO, StoreDAO storeDAO, UpdateUserMainPanel parentPanel) {
+    public UpdateUserSousPanel(MainWindow mainWindow, User user, UserDAO userDAO, StoreDAO storeDAO, UpdateUserMainPanel parentPanel) {
         setLayout(new GridLayout(1, 7));
 
         userId = user.getId();
@@ -33,7 +34,7 @@ public class UpdateUserSousPanel extends JPanel {
         String[] roles = {"User", "Admin"};
         roleComboBox = new JComboBox<>(roles);
         roleComboBox.setSelectedItem(user.getRole());
-        roleComboBox.setEnabled(user.getRole().equals("Admin"));
+        roleComboBox.setEnabled(mainWindow.isAdmin());
         List<Store> stores = null;
         try {
             stores = storeDAO.getStores();
@@ -47,30 +48,27 @@ public class UpdateUserSousPanel extends JPanel {
         }
         storeComboBox = new JComboBox<>(storeNames);
         storeComboBox.setSelectedItem(storeDAO.getStoreName(user.getStore()));
-        storeComboBox.setEnabled(user.getRole().equals("Admin"));
+        storeComboBox.setEnabled(mainWindow.isAdmin());
 
 
         JButton updateButton = new JButton("Mettre à jour");
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir réaliser cette action ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                if(dialogResult == JOptionPane.YES_OPTION){
-                    user.setEmail(emailField.getText());
-                    if(!passwordField.getText().isEmpty()){
-                        user.setPassword(hashPassword(passwordField.getText()));
-                    }
-                    user.setPseudo(pseudoField.getText());
-                    user.setStore(storeDAO.getStoreId((String) storeComboBox.getSelectedItem()));
-                    user.setRole((String) roleComboBox.getSelectedItem());
+        updateButton.addActionListener(e -> {
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir réaliser cette action ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                user.setEmail(emailField.getText());
+                if(!passwordField.getText().isEmpty()){
+                    user.setPassword(hashPassword(passwordField.getText()));
+                }
+                user.setPseudo(pseudoField.getText());
+                user.setStore(storeDAO.getStoreId((String) storeComboBox.getSelectedItem()));
+                user.setRole((String) roleComboBox.getSelectedItem());
 
-                    try {
-                        userDAO.updateUser(userId, user);
-                        parentPanel.refreshPanel();
-                    } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(null, "Erreur lors de le la mise à jour de l'utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
-                        throw new RuntimeException(ex);
-                    }
+                try {
+                    userDAO.updateUser(userId, user);
+                    parentPanel.refreshPanel();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erreur lors de le la mise à jour de l'utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    throw new RuntimeException(ex);
                 }
             }
         });
