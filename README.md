@@ -24,6 +24,8 @@ iStore est une application qui vise à produire la meilleure expérience pour to
 1. Compilez le projet en utilisant `javac src/main/java/Main.java`.
 2. Exécutez le projet en utilisant `java Main.java`.
 
+   Si jamais la compilation ou l'exécution échoue, vérifiez si votre version de votre JDK est à jour et/ou essayez de lancer l'application directement depuis un IDE (exemple : IntelliJ IDEA).
+
 ## Utilisation
 
 Après avoir lancé l'application, la première fenêtre demandera à l'utilisateur de créer un compte (requiert un email/mot de passe) ou de se connecter (en utilisant uniquement l'email/mot de passe).
