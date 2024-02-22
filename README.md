@@ -17,7 +17,10 @@ iStore est une application qui vise à produire la meilleure expérience pour to
 1. Assurez-vous que vous avez un système de gestion de base de données (SGBD) installé, comme MySQL ou PostgreSQL.
 2. Ouvrez votre SGBD et créez une nouvelle base de données pour le projet.
 3. Exécutez le script SQL fourni pour configurer la base de données. Le script se trouve dans `src/main/java/Database/script.sql`.
-4. Configurez vos informations de base de données dans le fichier `DbManager.java`. Vous devrez remplacer les valeurs des variables d'environnement par vos propres informations de base de données.
+4. Créer un fichier infos.env à la racine du projet, comme ce fichier et notez à l'intérieur les 3 lignes suivantes en faisant attention à bien remplacer vos informations à la place des placeholders :
+   DB_PATH=LeCheminAVotreDatabase
+   DB_USER=LeNomDUtilisateurDeLaDatabase
+   DB_PASSWORD=LeMotDePasseDeLUtilisateurDeLaDatabase
 
 ## Compilation et exécution
 
