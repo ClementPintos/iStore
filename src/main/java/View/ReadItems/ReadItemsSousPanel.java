@@ -3,13 +3,14 @@ package View.ReadItems;
 import DAO.ItemDAO;
 import DAO.StoreDAO;
 import Model.Item;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
 public class ReadItemsSousPanel extends JPanel {
 
-    public ReadItemsSousPanel(Item item, ItemDAO itemDAO, StoreDAO storeDAO, String storeName, ReadItemsMainPanel parentPanel) {
+    public ReadItemsSousPanel(Item item, ItemDAO itemDAO, StoreDAO storeDAO, String storeName) {
 
         setLayout(new GridLayout(1, 4));
 

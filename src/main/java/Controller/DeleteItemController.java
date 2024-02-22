@@ -4,12 +4,10 @@ import DAO.ItemDAO;
 import DAO.StoreDAO;
 import View.DeleteItem.DeleteItemMainPanel;
 
-import javax.swing.*;
-
 public class DeleteItemController {
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
-    private DeleteItemMainPanel parentPanel;
+    private final ItemDAO itemDAO;
+    private final StoreDAO storeDAO;
+    private final DeleteItemMainPanel parentPanel;
 
     public DeleteItemController(DeleteItemMainPanel parentPanel, ItemDAO itemDAO, StoreDAO storeDAO) {
         this.itemDAO = itemDAO;

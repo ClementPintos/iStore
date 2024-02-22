@@ -2,17 +2,18 @@ package View.AddStore;
 
 import DAO.UserDAO;
 import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
 public class AddStoreMainPanel extends JPanel {
-    private UserDAO userDAO;
-    private JTextField storeNameField;
-    private JButton addButton;
+    private final UserDAO userDAO;
+    private final JTextField storeNameField;
+    private final JButton addButton;
     private List<User> users;
-    private JPanel sousPanel;
+    private final JPanel sousPanel;
 
     public AddStoreMainPanel(UserDAO userDAO) {
         this.userDAO = userDAO;

@@ -2,7 +2,6 @@ package View.UpdateUser;
 
 import DAO.StoreDAO;
 import DAO.UserDAO;
-import Model.Store;
 import Model.User;
 import View.MainWindow;
 
@@ -13,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateUserMainPanel extends JPanel {
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
+    private final UserDAO userDAO;
+    private final StoreDAO storeDAO;
     private List<User> users;
-    private MainWindow mainWindow;
+    private final MainWindow mainWindow;
 
     public UpdateUserMainPanel(UserDAO userDAO, StoreDAO storeDAO, MainWindow mainWindow) {
         this.userDAO = userDAO;

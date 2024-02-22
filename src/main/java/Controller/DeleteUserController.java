@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.StoreDAO;
 import DAO.UserDAO;
-import Model.Store;
 import Model.User;
 import View.DeleteUser.DeleteUserMainPanel;
 import View.DeleteUser.DeleteUserSousPanel;
@@ -11,9 +10,9 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class DeleteUserController {
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
-    private DeleteUserMainPanel parentPanel;
+    private final UserDAO userDAO;
+    private final StoreDAO storeDAO;
+    private final DeleteUserMainPanel parentPanel;
 
     public DeleteUserController(DeleteUserMainPanel parentPanel, UserDAO userDAO, StoreDAO storeDAO) {
         this.userDAO = userDAO;

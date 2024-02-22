@@ -1,11 +1,12 @@
 package View.AddStore;
 
 import Model.User;
+
 import javax.swing.*;
 
 public class AddStoreSousPanel extends JPanel {
-    private User user;
-    private JCheckBox checkBox;
+    private final User user;
+    private final JCheckBox checkBox;
 
     public AddStoreSousPanel(User user) {
         this.user = user;

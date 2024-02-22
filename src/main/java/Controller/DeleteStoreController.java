@@ -10,9 +10,9 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class DeleteStoreController {
-    private StoreDAO storeDAO;
+    private final StoreDAO storeDAO;
     private UserDAO userDAO;
-    private DeleteStoreMainPanel parentPanel;
+    private final DeleteStoreMainPanel parentPanel;
 
     public DeleteStoreController(DeleteStoreMainPanel parentPanel, StoreDAO storeDAO) {
         this.storeDAO = storeDAO;

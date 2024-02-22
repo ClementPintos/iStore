@@ -2,7 +2,6 @@ package DAO;
 
 import Database.DbManager;
 import Model.Item;
-import Model.User;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDAOImpl implements ItemDAO {
-    private DbManager dbManager;
+    private final DbManager dbManager;
     public ItemDAOImpl(DbManager dbManager){
         this.dbManager = dbManager;
     }
@@ -25,8 +24,8 @@ public class ItemDAOImpl implements ItemDAO {
         try(
                 Connection connection = dbManager.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet resultSet = statement.executeQuery()
         ){
-            ResultSet resultSet = statement.executeQuery();
 
             if(resultSet.next()){
                 return resultSet.getInt("max");
@@ -37,14 +36,14 @@ public class ItemDAOImpl implements ItemDAO {
         return 1;
     }
 
-    public boolean addItemInStore(Item item, int idStore) {
+    public void addItemInStore(Item item, int idStore) {
 
         String query = "INSERT INTO item VALUES (?, ?, ?);";
 
         try(
             Connection connection = dbManager.getConnection();
 
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setInt(1, item.getItemId());
@@ -53,12 +52,9 @@ public class ItemDAOImpl implements ItemDAO {
 
             statement.executeUpdate();
 
-            return true;
-
         } catch (SQLException e) {
             System.out.println("id : " + item.getItemId() + ", name : " + item.getItemName());
             JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout du produit au store.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
     public boolean addItemInInventory(int idItem, int idStore) {
@@ -67,8 +63,7 @@ public class ItemDAOImpl implements ItemDAO {
 
         try(
                 Connection connection = dbManager.getConnection();
-
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setInt(1, idStore);
@@ -79,7 +74,7 @@ public class ItemDAOImpl implements ItemDAO {
             return true;
 
         } catch (SQLException e) {
-            System.out.println("id : " + idStore + ", id item : " + idItem);
+            JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout de l'item à l'inventaire'.", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
@@ -89,7 +84,7 @@ public class ItemDAOImpl implements ItemDAO {
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setString(1, item.getItemName());
@@ -111,7 +106,7 @@ public class ItemDAOImpl implements ItemDAO {
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setInt(1, id_item);
@@ -127,13 +122,13 @@ public class ItemDAOImpl implements ItemDAO {
         }
         return 0;
     }
-    public boolean deleteItem(int idItem, String nomStore){
+    public void deleteItem(int idItem, String nomStore){
 
         String query = "DELETE FROM inventory WHERE id_item = ? AND id_store IN (SELECT id_store FROM store WHERE name_store = ?)";
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setInt(1, idItem);
@@ -141,20 +136,17 @@ public class ItemDAOImpl implements ItemDAO {
 
             statement.executeUpdate();
 
-            return true;
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du store.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
-    public boolean increaseItem(int idItem, int idStore, int quantity){
+    public void increaseItem(int idItem, int idStore, int quantity){
 
         String query = "UPDATE inventory SET quantity_item = quantity_item + ? WHERE id_store = ? AND id_item = ?;";
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setInt(1, quantity);
@@ -163,18 +155,15 @@ public class ItemDAOImpl implements ItemDAO {
 
             statement.executeUpdate();
 
-            return true;
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors de l' ajout de produit en stock.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return false;
         }    }
-    public boolean decreaseItem(int idItem, int idStore, int quantity){
+    public void decreaseItem(int idItem, int idStore, int quantity){
         String query = "UPDATE inventory SET quantity_item = quantity_item - ? WHERE id_store = ? AND id_item = ?;";
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             statement.setInt(1, quantity);
@@ -183,11 +172,8 @@ public class ItemDAOImpl implements ItemDAO {
 
             statement.executeUpdate();
 
-            return true;
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors du retrait de produit en stock.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
 
@@ -198,7 +184,7 @@ public class ItemDAOImpl implements ItemDAO {
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ){
             statement.setInt(1, storeId);
             try(ResultSet result = statement.executeQuery()){

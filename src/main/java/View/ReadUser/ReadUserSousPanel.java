@@ -1,6 +1,7 @@
 package View.ReadUser;
 
 import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
 

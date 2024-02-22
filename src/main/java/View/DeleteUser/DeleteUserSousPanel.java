@@ -3,8 +3,6 @@ package View.DeleteUser;
 import DAO.StoreDAO;
 import DAO.UserDAO;
 import Model.User;
-import View.DeleteUser.DeleteUserMainPanel;
-import View.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,11 +35,11 @@ public class DeleteUserSousPanel extends JPanel {
                             window.dispose();
                         }
 
-                    };
+                    }
                     parentPanel.refreshPanel();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Echec lors de la suppression de cet utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
-                };
+                }
             }
         });
         add(emailLabel);

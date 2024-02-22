@@ -2,8 +2,8 @@ package Model;
 
 public class Store {
 
-    private int storeId;
-    private String storeName;
+    private final int storeId;
+    private final String storeName;
 
     public Store(int storeId, String storeName) {
         this.storeId = storeId;
@@ -13,16 +13,8 @@ public class Store {
     public int getStoreId() {
         return storeId;
     }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
-
     public String getStoreName() {
         return storeName;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
 }

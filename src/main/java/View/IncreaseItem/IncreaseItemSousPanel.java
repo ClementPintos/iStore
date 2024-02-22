@@ -20,7 +20,7 @@ public class IncreaseItemSousPanel extends JPanel {
         int itemQuantity = 0;
 
         try {
-            itemQuantity = itemDAO.getItemQuantity(itemId, storeId);;
+            itemQuantity = itemDAO.getItemQuantity(itemId, storeId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -30,7 +30,7 @@ public class IncreaseItemSousPanel extends JPanel {
         JLabel storeNameLabel = new JLabel(storeName);
         JLabel itemNameLabel = new JLabel(item.getItemName());
         JLabel itemPriceLabel = new JLabel(String.valueOf(item.getItemPrice()));
-        JLabel itemQuantityLabel = new JLabel(String.valueOf(itemQuantity));;
+        JLabel itemQuantityLabel = new JLabel(String.valueOf(itemQuantity));
         JButton increaseButton = new JButton("Augmenter");
 
         increaseButton.addActionListener(new ActionListener() {

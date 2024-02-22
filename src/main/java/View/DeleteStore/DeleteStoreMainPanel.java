@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DeleteStoreMainPanel extends JPanel {
-    private StoreDAO storeDAO;
-    private UserDAO userDAO;
+    private final StoreDAO storeDAO;
+    private final UserDAO userDAO;
     private List<Store> stores;
-    private MainWindow mainWindow;
+    private final MainWindow mainWindow;
 
     public DeleteStoreMainPanel(StoreDAO storeDAO, UserDAO userDAO, MainWindow mainWindow) {
         this.storeDAO = storeDAO;

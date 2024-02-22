@@ -1,9 +1,8 @@
 package DAO;
 
 import Database.DbManager;
-import Model.Item;
-import Model.Store;
 import Model.User;
+
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    private DbManager dbManager;
+    private final DbManager dbManager;
 
     public UserDAOImpl(DbManager dbManager){
         this.dbManager = dbManager;
@@ -26,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
         try(
             Connection connection = dbManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery()
         ){
             if(resultSet.next()){
                 return resultSet.getInt("max");
@@ -83,7 +82,7 @@ public class UserDAOImpl implements UserDAO {
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ) {
             statement.setInt(1, newUser.getId());
             statement.setString(2, newUser.getEmail());
@@ -110,7 +109,7 @@ public class UserDAOImpl implements UserDAO {
         try(
             Connection connection = dbManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery()
         ){
           if(resultSet.next()){
               return resultSet.getInt("count");
@@ -121,17 +120,13 @@ public class UserDAOImpl implements UserDAO {
         return 0;
     }
 
-    public boolean readUser(String loginCible) throws SQLException {
-        return false;
-    }
-
     public void updateUser(int id, User user) throws SQLException {
 
         String query = "UPDATE user SET email = ?, password = ?, pseudo = ?, role = ?, id_store = ? WHERE id_user = ?;";
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
@@ -147,20 +142,18 @@ public class UserDAOImpl implements UserDAO {
 
     }
 
-    public boolean deleteUser(String loginCible) throws SQLException {
+    public void deleteUser(String loginCible) throws SQLException {
 
         String query = "DELETE FROM user WHERE email = ?;";
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ) {
             statement.setString(1, loginCible);
             statement.executeUpdate();
-            return true;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors de la délétion de l'utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
 
@@ -170,7 +163,7 @@ public class UserDAOImpl implements UserDAO {
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
             statement.setString(1, loginCible);
 
@@ -266,7 +259,7 @@ public class UserDAOImpl implements UserDAO {
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ){
             try(ResultSet result = statement.executeQuery()){
                 while(result.next()){
@@ -292,7 +285,7 @@ public class UserDAOImpl implements UserDAO {
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ){
             statement.setInt(1, idStore);
             try(ResultSet result = statement.executeQuery()){
@@ -317,7 +310,7 @@ public class UserDAOImpl implements UserDAO {
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
             statement.setInt(1, idStore);
 
@@ -333,7 +326,7 @@ public class UserDAOImpl implements UserDAO {
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ) {
 
             for (User user : employes) {

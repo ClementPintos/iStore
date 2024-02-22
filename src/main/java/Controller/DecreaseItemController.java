@@ -5,9 +5,9 @@ import DAO.StoreDAO;
 import View.DecreaseItem.DecreaseItemMainPanel;
 
 public class DecreaseItemController {
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
-    private DecreaseItemMainPanel parentPanel;
+    private final ItemDAO itemDAO;
+    private final StoreDAO storeDAO;
+    private final DecreaseItemMainPanel parentPanel;
 
     public DecreaseItemController(DecreaseItemMainPanel parentPanel, ItemDAO itemDAO, StoreDAO storeDAO) {
         this.itemDAO = itemDAO;

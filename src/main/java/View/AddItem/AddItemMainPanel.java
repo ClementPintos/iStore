@@ -1,5 +1,6 @@
 package View.AddItem;
 
+import Controller.AddItemController;
 import DAO.ItemDAO;
 import DAO.StoreDAO;
 import Model.Store;
@@ -10,12 +11,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AddItemMainPanel extends JPanel {
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
+    private final StoreDAO storeDAO;
+    private final AddItemController controller;
 
     public AddItemMainPanel(ItemDAO itemDAO, StoreDAO storeDAO) {
-        this.itemDAO = itemDAO;
         this.storeDAO = storeDAO;
+        this.controller = new AddItemController(this, itemDAO, storeDAO);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
@@ -33,7 +34,7 @@ public class AddItemMainPanel extends JPanel {
 
             for (Store store : stores) {
                 if(store.getStoreId() != 1){
-                    add(new AddItemSousPanel(store, itemDAO, storeDAO, this));
+                    add(new AddItemSousPanel(store, controller));
                 }
             }
         } catch (SQLException e) {

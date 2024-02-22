@@ -9,8 +9,8 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class WhitelistUserController {
-    private UserDAO userDAO;
-    private WhitelistUserMainPanel parentPanel;
+    private final UserDAO userDAO;
+    private final WhitelistUserMainPanel parentPanel;
 
     public WhitelistUserController(WhitelistUserMainPanel parentPanel, UserDAO userDAO) {
         this.userDAO = userDAO;

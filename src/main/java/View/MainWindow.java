@@ -1,9 +1,8 @@
 package View;
 
 import Controller.AccueilController;
-import Controller.LaunchingController;
-import Controller.SigninController;
 import Controller.LoginController;
+import Controller.SigninController;
 import DAO.ItemDAOImpl;
 import DAO.StoreDAOImpl;
 import DAO.UserDAOImpl;
@@ -13,10 +12,10 @@ import Model.User;
 import javax.swing.*;
 
 public class MainWindow extends JFrame {
-    private LaunchingPanel launchingPanel;
-    private LoginPanel loginPanel;
-    private SigninPanel signinPanel;
-    private AccueilPanel accueilPanel;
+    private final LaunchingPanel launchingPanel;
+    private final LoginPanel loginPanel;
+    private final SigninPanel signinPanel;
+    private final AccueilPanel accueilPanel;
 
     private User connectedUser;
 
@@ -33,12 +32,11 @@ public class MainWindow extends JFrame {
         StoreDAOImpl storeDAO = new StoreDAOImpl(dbManager);
         ItemDAOImpl itemDAO = new ItemDAOImpl(dbManager);
 
-        launchingPanel = new LaunchingPanel();
+        launchingPanel = new LaunchingPanel(this);
         loginPanel = new LoginPanel();
         signinPanel = new SigninPanel();
         accueilPanel = new AccueilPanel();
 
-        new LaunchingController(this, launchingPanel);
         new SigninController(this, signinPanel, userDAO);
         new LoginController(this, loginPanel, userDAO);
         new AccueilController(this, accueilPanel, userDAO, storeDAO, itemDAO);
@@ -82,10 +80,6 @@ public class MainWindow extends JFrame {
     public boolean isAdmin(){
         User connectedUser = getConnectedUser();
         return connectedUser.getRole().equals("Admin");
-    }
-    public boolean estAuChomage(){
-        User connectedUser = getConnectedUser();
-        return connectedUser.getStore() == 1;
     }
 
 }

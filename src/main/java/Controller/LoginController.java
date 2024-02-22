@@ -3,21 +3,20 @@ package Controller;
 import DAO.UserDAO;
 import DAO.UserDAOImpl;
 import Model.User;
-import View.MainWindow;
 import View.LoginPanel;
+import View.MainWindow;
+
+import java.sql.SQLException;
 
 import static Utils.PasswordUtils.hashPassword;
-
-import javax.swing.*;
-import java.sql.SQLException;
 
 
 
 public class LoginController {
 
-    private MainWindow mainWindow;
-    private LoginPanel loginPanel;
-    private UserDAO userDAO;
+    private final MainWindow mainWindow;
+    private final LoginPanel loginPanel;
+    private final UserDAO userDAO;
 
     public LoginController(MainWindow mainWindow, LoginPanel loginPanel, UserDAOImpl userDAO){
         this.mainWindow = mainWindow;

@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ReadEmployeesMainPanel extends JPanel {
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
-    private MainWindow mainWindow;
+    private final UserDAO userDAO;
+    private final StoreDAO storeDAO;
+    private final MainWindow mainWindow;
 
     public ReadEmployeesMainPanel(MainWindow mainWindow, UserDAO userDAO, StoreDAO storeDAO) {
         this.userDAO = userDAO;

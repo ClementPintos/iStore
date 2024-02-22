@@ -1,9 +1,17 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+
 public class SigninPanel extends JPanel {
+
+    private static final Dimension FIELD_SIZE = new Dimension(200, 30);
+    private static final Font LABEL_FONT = new Font("Georgia", Font.PLAIN, 14);
+    private static final Font TITLE_FONT = new Font("Georgia", Font.BOLD, 18);
+    private static final Color BUTTON_COLOR = new Color(70, 130, 180);
+    private static final Color PANEL_COLOR = new Color(240, 248, 255);
 
     private JTextField emailField;
     private JPasswordField passwordField;
@@ -11,69 +19,76 @@ public class SigninPanel extends JPanel {
     private JButton returnButton;
 
     public SigninPanel(){
-
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        Dimension fieldSize = new Dimension(200, 20);
+        setBackground(PANEL_COLOR);
+        setBorder(new EmptyBorder(10, 10, 10, 10));
+        setupUI();
+    }
+
+    private void setupUI() {
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
 
         JLabel titleLabel = new JLabel("Créer un compte");
         titleLabel.setFont(new Font("Georgia", Font.BOLD, 18));
-        add(titleLabel);
-
-        add(Box.createRigidArea(new Dimension(0,100)));
-
-        emailField = new JTextField();
-        emailField.setPreferredSize(fieldSize);
-
-        passwordField = new JPasswordField();
-        passwordField.setPreferredSize(fieldSize);
-
-        signinButton = new JButton("Valider");
-        returnButton = new JButton("Retour");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.insets = new Insets(10, 10, 10, 10);
+        add(titleLabel, constraints);
 
         JLabel emailLabel = new JLabel("eMail");
         emailLabel.setFont(new Font("Georgia", Font.PLAIN, 14));
-        JPanel emailPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        emailPanel.add(emailLabel);
-        emailPanel.add(emailField);
-        add(emailPanel);
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        add(emailLabel, constraints);
+
+        emailField = new JTextField(20);
+        constraints.gridx = 1;
+        add(emailField, constraints);
 
         JLabel passwordLabel = new JLabel("Mot de passe");
         passwordLabel.setFont(new Font("Georgia", Font.PLAIN, 14));
-        JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        passwordPanel.add(passwordLabel);
-        passwordPanel.add(passwordField);
-        add(passwordPanel);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        add(passwordLabel, constraints);
 
-        add(signinButton);
+        passwordField = new JPasswordField(20);
+        constraints.gridx = 1;
+        add(passwordField, constraints);
 
-        add(Box.createRigidArea(new Dimension(0,10)));
+        signinButton = new JButton("Valider");
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 2;
+        add(signinButton, constraints);
 
-        add(returnButton);
-
+        returnButton = new JButton("Retour");
+        constraints.gridy = 4;
+        add(returnButton, constraints);
     }
-    public void setSigninRetourButtonAction(ActionListener action){
-        returnButton.addActionListener(action);
-    }
+
     public void setSigninButtonAction(ActionListener action){
-        try{
-                signinButton.addActionListener(action);
-        }catch (Error e){
-            System.out.println("Erreur");
-        }
+        signinButton.addActionListener(action);
+    }
+
+    public void setReturnButtonAction(ActionListener action){
+        returnButton.addActionListener(action);
     }
 
     public String getEmailField() {
         return emailField.getText();
     }
+
     public void emptyEmailField() {
         emailField.setText("");
-    }
-    public void emptyPasswordField() {
-        passwordField.setText("");
     }
 
     public String getPasswordField() {
         return passwordField.getText();
     }
 
+    public void emptyPasswordField() {
+        passwordField.setText("");
+    }
 }

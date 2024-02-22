@@ -2,6 +2,7 @@ package View.ReadUser;
 
 import DAO.UserDAO;
 import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class ReadUserMainPanel extends JPanel{
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
     private List<User> users;
 
     public ReadUserMainPanel(UserDAO userDAO) {

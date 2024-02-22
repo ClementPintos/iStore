@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteUserMainPanel extends JPanel {
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
+    private final UserDAO userDAO;
+    private final StoreDAO storeDAO;
     private List<User> users;
-    private MainWindow mainWindow;
+    private final MainWindow mainWindow;
 
     public DeleteUserMainPanel(UserDAO userDAO, StoreDAO storeDAO, MainWindow mainWindow) {
         this.userDAO = userDAO;
@@ -67,7 +67,7 @@ public class DeleteUserMainPanel extends JPanel {
             if(user == null){
                 mainWindow.deconnexion();
                 return true;
-            };
+            }
             return false;
         } catch (SQLException e) {
             throw new RuntimeException(e);

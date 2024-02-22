@@ -4,12 +4,13 @@ import DAO.UserDAO;
 import Model.User;
 import View.ReadUser.ReadUserMainPanel;
 import View.ReadUser.ReadUserSousPanel;
+
 import javax.swing.*;
 import java.sql.SQLException;
 
 public class ReadUserController {
-    private UserDAO userDAO;
-    private ReadUserMainPanel parentPanel;
+    private final UserDAO userDAO;
+    private final ReadUserMainPanel parentPanel;
 
     public ReadUserController(ReadUserMainPanel parentPanel, UserDAO userDAO) {
         this.userDAO = userDAO;

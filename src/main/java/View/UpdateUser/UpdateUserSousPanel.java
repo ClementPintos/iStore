@@ -15,12 +15,12 @@ import java.util.List;
 import static Utils.PasswordUtils.hashPassword;
 
 public class UpdateUserSousPanel extends JPanel {
-    private int userId;
-    private JTextField emailField;
-    private JTextField pseudoField;
-    private JTextField passwordField;
-    private JComboBox<String> roleComboBox;
-    private JComboBox<String> storeComboBox;
+    private final int userId;
+    private final JTextField emailField;
+    private final JTextField pseudoField;
+    private final JTextField passwordField;
+    private final JComboBox<String> roleComboBox;
+    private final JComboBox<String> storeComboBox;
 
     public UpdateUserSousPanel(User user, UserDAO userDAO, StoreDAO storeDAO, UpdateUserMainPanel parentPanel) {
         setLayout(new GridLayout(1, 7));

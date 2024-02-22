@@ -10,9 +10,9 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class UpdateUserController {
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
-    private UpdateUserMainPanel parentPanel;
+    private final UserDAO userDAO;
+    private final StoreDAO storeDAO;
+    private final UpdateUserMainPanel parentPanel;
 
     public UpdateUserController(UpdateUserMainPanel parentPanel, UserDAO userDAO, StoreDAO storeDAO) {
         this.userDAO = userDAO;

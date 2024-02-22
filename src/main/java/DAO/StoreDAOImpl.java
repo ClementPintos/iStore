@@ -2,7 +2,6 @@ package DAO;
 
 import Database.DbManager;
 import Model.Store;
-import Model.User;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class StoreDAOImpl implements StoreDAO{
 
-    private DbManager dbManager;
+    private final DbManager dbManager;
     public StoreDAOImpl(DbManager dbManager){
         this.dbManager = dbManager;
     }
@@ -26,9 +25,8 @@ public class StoreDAOImpl implements StoreDAO{
         try(
             Connection connection = dbManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery()
         ){
-            ResultSet resultSet = statement.executeQuery();
-
             if(resultSet.next()){
                 return resultSet.getInt("max");
             }
@@ -45,7 +43,7 @@ public class StoreDAOImpl implements StoreDAO{
         try(
             Connection connection = dbManager.getConnection();
             PreparedStatement store_statement = connection.prepareStatement(store_query);
-            PreparedStatement inventory_statement = connection.prepareStatement(inventory_query);
+            PreparedStatement inventory_statement = connection.prepareStatement(inventory_query)
         ) {
             store_statement.setInt(1, store.getStoreId());
             inventory_statement.setInt(1, store.getStoreId());
@@ -61,7 +59,7 @@ public class StoreDAOImpl implements StoreDAO{
         }
     }
 
-    public boolean deleteStore(int idStore) throws SQLException {
+    public void deleteStore(int idStore) throws SQLException {
 
         String inventory_query = "DELETE FROM inventory WHERE id_store = ?;";
         String store_query = "DELETE FROM store WHERE id_store = ?;";
@@ -69,7 +67,7 @@ public class StoreDAOImpl implements StoreDAO{
         try(
                 Connection connection = dbManager.getConnection();
                 PreparedStatement inventory_statement = connection.prepareStatement(inventory_query);
-                PreparedStatement store_statement = connection.prepareStatement(store_query);
+                PreparedStatement store_statement = connection.prepareStatement(store_query)
         ) {
 
             inventory_statement.setInt(1, idStore);
@@ -78,11 +76,8 @@ public class StoreDAOImpl implements StoreDAO{
             inventory_statement.executeUpdate();
             store_statement.executeUpdate();
 
-            return true;
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du store.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
 
@@ -113,7 +108,7 @@ public class StoreDAOImpl implements StoreDAO{
 
         try(
             Connection connection = dbManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query)
         ){
             statement.setInt(1, idStore);
             ResultSet resultSet = statement.executeQuery();
@@ -133,7 +128,7 @@ public class StoreDAOImpl implements StoreDAO{
 
         try(
                 Connection connection = dbManager.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(query)
         ){
             statement.setString(1, nomStore);
             ResultSet resultSet = statement.executeQuery();

@@ -4,8 +4,8 @@ import DAO.ItemDAO;
 import DAO.StoreDAO;
 import Model.Item;
 import Model.Store;
-import View.DeleteItem.DeleteItemSousPanel;
 import View.MainWindow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class ReadItemsMainPanel extends JPanel {
 
-    private MainWindow mainWindow;
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
+    private final MainWindow mainWindow;
+    private final ItemDAO itemDAO;
+    private final StoreDAO storeDAO;
 
     public ReadItemsMainPanel(MainWindow mainWindow, ItemDAO itemDAO, StoreDAO storeDAO) {
         this.mainWindow = mainWindow;
@@ -42,14 +42,14 @@ public class ReadItemsMainPanel extends JPanel {
                 for (Store store : stores) {
                     items = itemDAO.getItemsFromStore(store.getStoreId());
                     for (Item item : items) {
-                        add(new ReadItemsSousPanel(item, itemDAO, storeDAO, store.getStoreName(), this));
+                        add(new ReadItemsSousPanel(item, itemDAO, storeDAO, store.getStoreName()));
                     }
                 }
             } else {
                 items = itemDAO.getItemsFromStore(mainWindow.getConnectedUser().getStore());
                 for (Item item : items) {
                     String storeName = storeDAO.getStoreName(mainWindow.getConnectedUser().getStore());
-                    add(new ReadItemsSousPanel(item, itemDAO, storeDAO, storeName, this));
+                    add(new ReadItemsSousPanel(item, itemDAO, storeDAO, storeName));
                 }
             }
         } catch (SQLException e) {

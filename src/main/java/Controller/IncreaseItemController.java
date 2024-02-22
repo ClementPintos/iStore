@@ -5,9 +5,9 @@ import DAO.StoreDAO;
 import View.IncreaseItem.IncreaseItemMainPanel;
 
 public class IncreaseItemController {
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
-    private IncreaseItemMainPanel parentPanel;
+    private final ItemDAO itemDAO;
+    private final StoreDAO storeDAO;
+    private final IncreaseItemMainPanel parentPanel;
 
     public IncreaseItemController(IncreaseItemMainPanel parentPanel, ItemDAO itemDAO, StoreDAO storeDAO) {
         this.itemDAO = itemDAO;

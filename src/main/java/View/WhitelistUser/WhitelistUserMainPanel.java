@@ -2,13 +2,14 @@ package View.WhitelistUser;
 
 import DAO.UserDAO;
 import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
 public class WhitelistUserMainPanel extends JPanel {
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
     private List<User> users;
 
     public WhitelistUserMainPanel(UserDAO userDAO) {

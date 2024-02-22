@@ -1,25 +1,22 @@
 package View;
 
 import DAO.StoreDAO;
-import DAO.UserDAO;
 import Model.Store;
+
 import javax.swing.*;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
 public class AddUserPanel extends JPanel {
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
-    private JTextField emailField;
-    private JTextField pseudoField;
-    private JTextField passwordField;
-    private JComboBox<String> roleSelect;
-    private JComboBox<String> storeSelect;
-    private JButton addButton;
+    private final StoreDAO storeDAO;
+    private final JTextField emailField;
+    private final JTextField pseudoField;
+    private final JTextField passwordField;
+    private final JComboBox<String> roleSelect;
+    private final JComboBox<String> storeSelect;
+    private final JButton addButton;
 
-    public AddUserPanel(UserDAO userDAO, StoreDAO storeDAO) {
-        this.userDAO = userDAO;
+    public AddUserPanel(StoreDAO storeDAO) {
         this.storeDAO = storeDAO;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -30,6 +27,10 @@ public class AddUserPanel extends JPanel {
         storeSelect = new JComboBox<>();
         addButton = new JButton("Ajouter");
 
+        addComponents();
+    }
+
+    private void addComponents() {
         add(new JLabel("eMail :"));
         add(emailField);
         add(new JLabel("Pseudo :"));
@@ -43,12 +44,20 @@ public class AddUserPanel extends JPanel {
         add(addButton);
     }
 
-    public void refreshPanel(boolean isAdmin) throws SQLException {
+    private void resetFields() {
+        emailField.setText("");
+        passwordField.setText("");
+        pseudoField.setText("");
+    }
+
+    private void updateRoleSelect(boolean isAdmin) {
         roleSelect.setSelectedIndex(0);
         if (!isAdmin) {
             roleSelect.setEnabled(false);
         }
+    }
 
+    private void updateStoreSelect(boolean isAdmin) throws SQLException {
         storeSelect.removeAllItems();
         List<Store> stores = storeDAO.getStores();
         for (Store store : stores) {
@@ -58,30 +67,37 @@ public class AddUserPanel extends JPanel {
             storeSelect.setSelectedItem("chomage");
             storeSelect.setEnabled(false);
         }
-        emailField.setText("");
-        passwordField.setText("");
-        pseudoField.setText("");
+    }
+
+    public void refreshPanel(boolean isAdmin) throws SQLException {
+        resetFields();
+        updateRoleSelect(isAdmin);
+        updateStoreSelect(isAdmin);
         revalidate();
         repaint();
     }
 
-    public JTextField getEmailField() {
-        return emailField;
+    public String getEmail() {
+        return emailField.getText();
     }
-    public JTextField getPseudoField() {
-        return pseudoField;
+
+    public String getPseudo() {
+        return pseudoField.getText();
     }
-    public JTextField getPasswordField() {
-        return passwordField;
+
+    public String getPassword() {
+        return passwordField.getText();
     }
-    public JComboBox<String> getRoleSelect() {
-        return roleSelect;
+
+    public String getRole() {
+        return (String) roleSelect.getSelectedItem();
     }
-    public JComboBox<String> getStoreSelect() {
-        return storeSelect;
+
+    public String getStore() {
+        return (String) storeSelect.getSelectedItem();
     }
+
     public JButton getAddButton() {
         return addButton;
     }
-
 }

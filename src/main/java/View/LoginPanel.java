@@ -12,53 +12,59 @@ public class LoginPanel extends JPanel {
     private JButton returnButton;
 
     public LoginPanel(){
+        setupUI();
+    }
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        Dimension fieldSize = new Dimension(200, 20);
+    private void setupUI() {
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
 
         JLabel titleLabel = new JLabel("Se connecter");
         titleLabel.setFont(new Font("Georgia", Font.BOLD, 18));
-        add(titleLabel);
-
-        add(Box.createRigidArea(new Dimension(0,100)));
-
-        loginField = new JTextField();
-        loginField.setPreferredSize(fieldSize);
-
-        passwordField = new JPasswordField();
-        passwordField.setPreferredSize(fieldSize);
-
-        loginButton = new JButton("Connexion");
-        returnButton = new JButton("Retour");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.insets = new Insets(10, 10, 10, 10);
+        add(titleLabel, constraints);
 
         JLabel loginLabel = new JLabel("Login");
         loginLabel.setFont(new Font("Georgia", Font.PLAIN, 14));
-        JPanel loginPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        loginPanel.add(loginLabel);
-        loginPanel.add(loginField);
-        add(loginPanel);
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        add(loginLabel, constraints);
+
+        loginField = new JTextField(20);
+        constraints.gridx = 1;
+        add(loginField, constraints);
 
         JLabel passwordLabel = new JLabel("Mot de passe");
         passwordLabel.setFont(new Font("Georgia", Font.PLAIN, 14));
-        JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        passwordPanel.add(passwordLabel);
-        passwordPanel.add(passwordField);
-        add(passwordPanel);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        add(passwordLabel, constraints);
 
-        add(loginButton);
+        passwordField = new JPasswordField(20);
+        constraints.gridx = 1;
+        add(passwordField, constraints);
 
-        add(Box.createRigidArea(new Dimension(0,10)));
+        loginButton = new JButton("Connexion");
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 2;
+        add(loginButton, constraints);
 
-        add(returnButton);
+        returnButton = new JButton("Retour");
+        constraints.gridy = 4;
+        add(returnButton, constraints);
     }
-
     public String getLoginField() {
         return loginField.getText();
     }
 
     public String getPasswordField() {
-        return passwordField.getText();
+        return new String(passwordField.getPassword());
     }
+
     public void emptyPasswordField() {
         passwordField.setText("");
     }
@@ -68,10 +74,6 @@ public class LoginPanel extends JPanel {
     }
 
     public void setLoginButtonAction(ActionListener action){
-        try{
-            loginButton.addActionListener(action);
-        }catch (Error e){
-            System.out.println("Erreur");
-        }
+        loginButton.addActionListener(action);
     }
 }

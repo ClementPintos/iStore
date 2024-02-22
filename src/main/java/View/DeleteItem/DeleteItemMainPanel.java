@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DeleteItemMainPanel extends JPanel {
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
+    private final ItemDAO itemDAO;
+    private final StoreDAO storeDAO;
 
     public DeleteItemMainPanel(ItemDAO itemDAO, StoreDAO storeDAO) {
         this.itemDAO = itemDAO;

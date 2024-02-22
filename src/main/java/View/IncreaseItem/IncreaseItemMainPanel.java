@@ -12,9 +12,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class IncreaseItemMainPanel extends JPanel {
-    private MainWindow mainWindow;
-    private ItemDAO itemDAO;
-    private StoreDAO storeDAO;
+    private final MainWindow mainWindow;
+    private final ItemDAO itemDAO;
+    private final StoreDAO storeDAO;
 
     public IncreaseItemMainPanel(MainWindow mainWindow, ItemDAO itemDAO, StoreDAO storeDAO) {
         this.mainWindow = mainWindow;

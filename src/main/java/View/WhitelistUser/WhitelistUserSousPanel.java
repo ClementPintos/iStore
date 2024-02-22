@@ -2,6 +2,7 @@ package View.WhitelistUser;
 
 import DAO.UserDAO;
 import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class WhitelistUserSousPanel extends JPanel {
-    private JLabel emailLabel;
+    private final JLabel emailLabel;
 
     public WhitelistUserSousPanel(User user, UserDAO userDAO, WhitelistUserMainPanel parentPanel) {
         setLayout(new GridLayout(1, 3));
@@ -26,7 +27,7 @@ public class WhitelistUserSousPanel extends JPanel {
                     parentPanel.refreshPanel();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Echec lors du whitelisting de cet utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
-                };
+                }
             }
         });
         JButton deleteButton = new JButton("Supprimer");
@@ -38,7 +39,7 @@ public class WhitelistUserSousPanel extends JPanel {
                     parentPanel.refreshPanel();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Echec lors de la suppression de cet utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
-                };
+                }
             }
         });
         add(emailLabel);

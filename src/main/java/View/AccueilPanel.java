@@ -6,133 +6,93 @@ import java.awt.event.ActionListener;
 
 public class AccueilPanel extends JPanel {
 
-    private JButton addUserButton;
-    private JButton deleteUserButton;
-    private JButton readUserButton;
-    private JButton updateUserButton;
-    private JButton whitelistUserButton;
-    private JButton addStoreButton;
-    private JButton removeStoreButton;
-    private JButton employeesStoreButton;
-    private JLabel itemIconLabel;
-    private JButton addItemButton;
-    private JButton removeItemButton;
-    private JButton browseItemButton;
-    private JButton increaseItemButton;
-    private JButton decreaseItemButton;
-    private JButton deconnectionButton;
+    private final JButton addUserButton;
+    private final JButton deleteUserButton;
+    private final JButton readUserButton;
+    private final JButton updateUserButton;
+    private final JButton whitelistUserButton;
+    private final JButton addStoreButton;
+    private final JButton removeStoreButton;
+    private final JButton employeesStoreButton;
+    private final JButton addItemButton;
+    private final JButton removeItemButton;
+    private final JButton browseItemButton;
+    private final JButton increaseItemButton;
+    private final JButton decreaseItemButton;
+    private final JButton deconnectionButton;
 
     public AccueilPanel(){
 
-        setLayout(new GridLayout(1, 4));
-
-
-        // Icon
-        ImageIcon userIcon = new ImageIcon("src\\main\\resources\\user_icon.png");
-        Image userImage = userIcon.getImage();
-        Image newUserImage = userImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        userIcon = new ImageIcon(newUserImage);
-        JLabel userIconLabel = new JLabel(userIcon);
-        // Bouttons
         addUserButton = new JButton("Ajouter un User");
         deleteUserButton = new JButton("Retirer un User");
-        readUserButton = new JButton("Rechercher un User");
+        readUserButton = new JButton("Voir la liste des Users");
         updateUserButton = new JButton("Update un User");
         whitelistUserButton = new JButton("Whitelister un User");
-        // Centrer les bouttons
-        userIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        deleteUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        readUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        updateUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        whitelistUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // Colonne User
-        JPanel userColumn = new JPanel();
-        userColumn.setLayout(new BoxLayout(userColumn, BoxLayout.Y_AXIS));
-        userColumn.add(Box.createRigidArea(new Dimension(0,32)));
-        userColumn.add(userIconLabel);
-        userColumn.add(Box.createRigidArea(new Dimension(0,32)));
-        userColumn.add(addUserButton);
-        userColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        userColumn.add(deleteUserButton);
-        userColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        userColumn.add(readUserButton);
-        userColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        userColumn.add(updateUserButton);
-        userColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        userColumn.add(whitelistUserButton);
-
-        add(userColumn);
-
-        ImageIcon storeIcon = new ImageIcon("src\\main\\resources\\store_icon.png");
-        Image storeImage = storeIcon.getImage();
-        Image newStoreImage = storeImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        storeIcon = new ImageIcon(newStoreImage);
-        JLabel storeIconLabel = new JLabel(storeIcon);
-
         addStoreButton = new JButton("Ajouter un Store");
         removeStoreButton = new JButton("Retirer un Store");
         employeesStoreButton = new JButton("Visualiser la liste des employés");
-
-        storeIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addStoreButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        removeStoreButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        employeesStoreButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JPanel storeColumn = new JPanel();
-        storeColumn.setLayout(new BoxLayout(storeColumn, BoxLayout.Y_AXIS));
-
-        storeColumn.add(Box.createRigidArea(new Dimension(0,32)));
-        storeColumn.add(storeIconLabel);
-        storeColumn.add(Box.createRigidArea(new Dimension(0,32)));
-        storeColumn.add(addStoreButton);
-        storeColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        storeColumn.add(removeStoreButton);
-        storeColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        storeColumn.add(employeesStoreButton);
-
-        add(storeColumn);
-
-        ImageIcon itemIcon = new ImageIcon("src\\main\\resources\\item_icon.png");
-        Image itemImage = itemIcon.getImage();
-        Image newItemImage = itemImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        itemIcon = new ImageIcon(newItemImage);
-        itemIconLabel = new JLabel(itemIcon);
-
         addItemButton = new JButton("Ajouter un nouvel Item");
         removeItemButton = new JButton("Supprimer un Item");
-        browseItemButton = new JButton("Visualiser les Items");
+        browseItemButton = new JButton("Visualiser la liste des Items");
         increaseItemButton = new JButton("Augmenter la quantité d'un Item");
         decreaseItemButton = new JButton("Diminuer la quantité d'un Item");
-        decreaseItemButton = new JButton("Diminuer la quantité d'un Item");
-
-        itemIconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        removeItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        browseItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        increaseItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        decreaseItemButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JPanel itemColumn = new JPanel();
-        itemColumn.setLayout(new BoxLayout(itemColumn, BoxLayout.Y_AXIS));
-
-        itemColumn.add(Box.createRigidArea(new Dimension(0,32)));
-        itemColumn.add(itemIconLabel);
-        itemColumn.add(Box.createRigidArea(new Dimension(0,32)));
-        itemColumn.add(addItemButton);
-        itemColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        itemColumn.add(removeItemButton);
-        itemColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        itemColumn.add(browseItemButton);
-        itemColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        itemColumn.add(increaseItemButton);
-        itemColumn.add(Box.createRigidArea(new Dimension(0,16)));
-        itemColumn.add(decreaseItemButton);
-
-        add(itemColumn);
-
         deconnectionButton = new JButton("Se déconnecter");
-        add(deconnectionButton);
+
+        setupUI();
+    }
+
+    private void setupUI() {
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        ImageIcon userIcon = new ImageIcon("src\\main\\resources\\user_icon.png");
+        Image userImage = userIcon.getImage();
+        Image newUserImage = userImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        userIcon = new ImageIcon(newUserImage);
+
+        ImageIcon storeIcon = new ImageIcon("src\\main\\resources\\user_icon.png");
+        Image storeImage = storeIcon.getImage();
+        Image newStoreImage = storeImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        storeIcon = new ImageIcon(newStoreImage);
+
+        ImageIcon itemIcon = new ImageIcon("src\\main\\resources\\user_icon.png");
+        Image itemImage = itemIcon.getImage();
+        Image newItemImage = itemImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        itemIcon = new ImageIcon(newItemImage);
+
+        // Colonne User
+        setupColumn("User", 0, userIcon, addUserButton, deleteUserButton, readUserButton, updateUserButton, whitelistUserButton);
+
+        // Colonne Store
+        setupColumn("Store", 1, storeIcon, addStoreButton, removeStoreButton, employeesStoreButton);
+
+        // Colonne Item
+        setupColumn("Item", 2, itemIcon, addItemButton, removeItemButton, browseItemButton, increaseItemButton, decreaseItemButton);
+
+        // Boutton Deconnection
+        constraints.gridx = 0;
+        constraints.gridy = -10;
+        constraints.gridwidth = 1;
+        constraints.weighty = 0;
+        constraints.anchor = GridBagConstraints.PAGE_END;
+        add(deconnectionButton, constraints);
+    }
+
+    private void setupColumn(String title, int x, ImageIcon icon, JButton... buttons) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = x;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.insets = new Insets(10, 10, 10, 10);
+
+        JLabel titleLabel = new JLabel(title, icon, JLabel.CENTER);
+        titleLabel.setFont(new Font("Georgia", Font.BOLD, 18));
+        add(titleLabel, constraints);
+
+        for (int i = 0; i < buttons.length; i++) {
+            constraints.gridy = i + 1;
+            add(buttons[i], constraints);
+        }
     }
 
     public void setAddUserButtonAction(ActionListener action){
@@ -162,7 +122,6 @@ public class AccueilPanel extends JPanel {
     public void setDeconnectionButtonAction(ActionListener action){
         deconnectionButton.addActionListener(action);
     }
-
     public void setAddItemButtonAction(ActionListener action){
         addItemButton.addActionListener(action);
     }
@@ -178,5 +137,4 @@ public class AccueilPanel extends JPanel {
     public void setIncreaseItemButtonAction(ActionListener action){
         increaseItemButton.addActionListener(action);
     }
-
 }

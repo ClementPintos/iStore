@@ -1,14 +1,16 @@
 package Controller;
 
 import DAO.*;
-import View.*;
+import View.AccueilPanel;
 import View.AddItem.AddItemMainPanel;
 import View.AddStore.AddStoreMainPanel;
+import View.AddUserPanel;
 import View.DecreaseItem.DecreaseItemMainPanel;
 import View.DeleteItem.DeleteItemMainPanel;
 import View.DeleteStore.DeleteStoreMainPanel;
 import View.DeleteUser.DeleteUserMainPanel;
 import View.IncreaseItem.IncreaseItemMainPanel;
+import View.MainWindow;
 import View.ReadEmployees.ReadEmployeesMainPanel;
 import View.ReadItems.ReadItemsMainPanel;
 import View.ReadUser.ReadUserMainPanel;
@@ -20,10 +22,10 @@ import java.sql.SQLException;
 
 public class AccueilController {
 
-    private MainWindow mainWindow;
-    private UserDAO userDAO;
-    private StoreDAO storeDAO;
-    private ItemDAO itemDAO;
+    private final MainWindow mainWindow;
+    private final UserDAO userDAO;
+    private final StoreDAO storeDAO;
+    private final ItemDAO itemDAO;
 
     public AccueilController(MainWindow mainWindow, AccueilPanel acceuilPanel, UserDAOImpl userDAO, StoreDAOImpl storeDAO, ItemDAOImpl itemDAO){
         this.mainWindow = mainWindow;
@@ -172,7 +174,7 @@ public class AccueilController {
     ////////////////////////// Constructeurs Users
 
     private void openAddUserWindow() throws SQLException {
-        AddUserPanel addUserMainPanel = new AddUserPanel(userDAO, storeDAO);
+        AddUserPanel addUserMainPanel = new AddUserPanel(storeDAO);
         AddUserController addUserController = new AddUserController(userDAO, storeDAO, addUserMainPanel, mainWindow);
         addUserMainPanel.refreshPanel(mainWindow.isAdmin());
         openWindow("Add User", addUserMainPanel);
@@ -239,9 +241,9 @@ public class AccueilController {
 
     private void openReadItemsWindow() throws SQLException {
         ReadItemsMainPanel readItemsMainPanel = new ReadItemsMainPanel(mainWindow, itemDAO, storeDAO);
-        ReadItemsController readItemsController = new ReadItemsController(readItemsMainPanel, itemDAO, storeDAO);
+        ReadItemsController readItemsController = new ReadItemsController(readItemsMainPanel);
         readItemsMainPanel.refreshPanel();
-        openWindow("Visualiser les employés", readItemsMainPanel);
+        openWindow("Visualiser les items", readItemsMainPanel);
     }
 
     private void openIncreaseItemWindow() throws SQLException {

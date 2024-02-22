@@ -12,7 +12,7 @@ public class PasswordUtils {
             byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
             return bytesToHex(encodedhash);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erreur lors du hachage du code.", e);
         }
     }
 

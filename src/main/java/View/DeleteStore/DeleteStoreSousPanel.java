@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class DeleteStoreSousPanel extends JPanel {
-    private JLabel nomLabel;
+    private final JLabel nomLabel;
 
     public DeleteStoreSousPanel(Store store, StoreDAO storeDAO, UserDAO userDAO, DeleteStoreMainPanel parentPanel) {
         setLayout(new GridLayout(1, 2));
@@ -34,7 +34,7 @@ public class DeleteStoreSousPanel extends JPanel {
                     parentPanel.refreshPanel();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Echec lors de la suppression de ce store", "Erreur", JOptionPane.ERROR_MESSAGE);
-                };
+                }
             }
         });
 
