@@ -65,9 +65,8 @@ public class UserDAOImpl implements UserDAO {
                     else {
                         JOptionPane.showMessageDialog(null, "Mot de passe erroné", "Erreur", JOptionPane.ERROR_MESSAGE);
                     }
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "Login erroné", "Erreur", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Login erroné ou compte inexistant", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (SQLException e){

@@ -22,6 +22,10 @@ public class AddUserController {
                 String pseudo = panel.getPseudo();
                 String password = hashPassword(panel.getPassword());
                 String role = panel.getRole();
+                if(mainWindow.isAdmin()){
+                    System.out.println("ok");
+                    System.out.println("pas ok");
+                }
                 boolean whitelisted = mainWindow.isAdmin();
                 int storeId = storeDAO.getStoreId(panel.getStore());
 

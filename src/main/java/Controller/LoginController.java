@@ -6,6 +6,7 @@ import Model.User;
 import View.LoginPanel;
 import View.MainWindow;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 import static Utils.PasswordUtils.hashPassword;
@@ -28,6 +29,7 @@ public class LoginController {
             try {
                 login();
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Echec lors de la connexion à la base de donnée", "Erreur", JOptionPane.ERROR_MESSAGE);
                 throw new RuntimeException(ex);
             }
         });
